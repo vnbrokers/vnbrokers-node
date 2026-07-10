@@ -16,3 +16,10 @@ export interface BrokerConfig {
   baseUrl?: string; // override endpoint mặc định nếu cần (sandbox/prod)
   timeoutMs?: number;
 }
+
+export interface DNSEBrokerConfig extends BrokerConfig {
+  broker: 'dnse';
+  apiKey: string;
+  apiSecret: string;
+  tradingToken?: string;
+}

@@ -2,6 +2,7 @@ import type { IBroker } from './brokers/base/IBroker';
 import type { BrokerConfig } from './types/config';
 import { BrokerError, BrokerErrorCode } from './errors/BrokerError';
 import { SSIBroker } from './brokers/ssi';
+import { DNSEBroker } from './brokers/dnse';
 
 /**
  * Entry point chính của thư viện.
@@ -27,6 +28,8 @@ export class VNBrokerClient {
 
   private static createBroker(config: BrokerConfig): IBroker {
     switch (config.broker) {
+      case 'dnse':
+        return new DNSEBroker(config as import('./types/config').DNSEBrokerConfig);
       case 'ssi':
         return new SSIBroker(config);
       case 'dnse':
@@ -34,7 +37,7 @@ export class VNBrokerClient {
       case 'fhsc':
         throw new BrokerError({
           code: BrokerErrorCode.UNKNOWN,
-          message: `Broker "${config.broker}" chưa được implement — mới có sẵn: ssi`,
+          message: `Broker "${config.broker}" chưa được implement — mới có sẵn: dnse, ssi`,
           broker: config.broker,
         });
       default:
