@@ -1,0 +1,7 @@
+[tools]
+node = "20.20.2"
+oxfmt = "0.55.0"
+
+[tasks.build]
+description = "Build NPM package"
+run = "npm build"
