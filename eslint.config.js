@@ -8,9 +8,9 @@ module.exports = [
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        // Không dùng typed-linting (project) để tránh phải đồng bộ tsconfig include/exclude
-        // với phạm vi lint (src + tests). Muốn bật type-aware rules thì tạo tsconfig.eslint.json
-        // include cả tests và trỏ project vào đó.
+        // Avoid typed linting (project) so tsconfig include/exclude does not need to match
+        // the lint scope (src + tests). To enable type-aware rules, create tsconfig.eslint.json,
+        // include the tests, and point the project option to it.
         ecmaVersion: 'latest',
         sourceType: 'module',
       },

@@ -22,8 +22,8 @@ import { SSIMarketService } from './market/SSIMarketService';
 const SSI_WS_URL = 'wss://fc-datafeed.ssi.com.vn/quote';
 
 /**
- * Facade: chỉ khởi tạo và delegate xuống các service con theo domain.
- * Không chứa business logic ở đây — logic thật nằm trong auth/account/order/market.
+ * Facade that only initializes and delegates to domain-specific services.
+ * Business logic belongs in the auth/account/order/market services, not here.
  */
 export class SSIBroker implements IBroker {
   private readonly http: SSIHttpClient;

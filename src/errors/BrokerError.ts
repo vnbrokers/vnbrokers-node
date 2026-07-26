@@ -9,13 +9,13 @@ export enum BrokerErrorCode {
 }
 
 /**
- * Lỗi chuẩn hóa: mỗi broker ném lỗi với format/mã khác nhau,
- * adapter phải map về BrokerError trước khi throw ra ngoài cho user.
+ * Normalized error: each broker throws errors in a different format/code,
+ * so adapters must map them to BrokerError before exposing them to users.
  */
 export class BrokerError extends Error {
   readonly code: BrokerErrorCode;
   readonly broker: string;
-  readonly raw?: unknown; // giữ lại lỗi gốc để debug
+  readonly raw?: unknown; // Preserve the original error for debugging
 
   constructor(params: {
     code: BrokerErrorCode;

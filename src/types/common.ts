@@ -1,20 +1,20 @@
 import type { OrderSide, OrderStatus, OrderType, MarketStatus } from './enums';
 
-/** Phiên đăng nhập đã chuẩn hóa, dùng chung cho mọi broker */
+/** Normalized authentication session shared by all brokers */
 export interface Session {
   accessToken: string;
   refreshToken?: string;
   expiresAt: number; // epoch ms
 }
 
-/** Thông tin tài khoản đã chuẩn hóa */
+/** Normalized account information */
 export interface Account {
   accountId: string;
   ownerName?: string;
   brokerName: string;
 }
 
-/** Số dư tài khoản */
+/** Account balance */
 export interface Balance {
   accountId: string;
   cashBalance: number;
@@ -23,7 +23,7 @@ export interface Balance {
   currency: 'VND';
 }
 
-/** Vị thế đang nắm giữ */
+/** Open position */
 export interface Position {
   accountId: string;
   symbol: string;
@@ -33,18 +33,18 @@ export interface Position {
   unrealizedPnl?: number;
 }
 
-/** Yêu cầu đặt lệnh gửi lên broker */
+/** Order request sent to a broker */
 export interface OrderRequest {
   accountId: string;
   symbol: string;
   side: OrderSide;
   type: OrderType;
   quantity: number;
-  price?: number; // bắt buộc nếu type = LIMIT
+  price?: number; // Required when type = LIMIT
   clientOrderId?: string;
 }
 
-/** Kết quả sau khi đặt lệnh */
+/** Order placement result */
 export interface OrderResult {
   orderId: string;
   clientOrderId?: string;
@@ -52,7 +52,7 @@ export interface OrderResult {
   submittedAt: number;
 }
 
-/** Thông tin lệnh (khi tra cứu lịch sử) */
+/** Order information returned by history queries */
 export interface Order extends OrderRequest {
   orderId: string;
   status: OrderStatus;
@@ -62,7 +62,7 @@ export interface Order extends OrderRequest {
   updatedAt: number;
 }
 
-/** Báo giá realtime/snapshot */
+/** Real-time or snapshot quote */
 export interface Quote {
   symbol: string;
   bidPrice: number;
@@ -74,7 +74,7 @@ export interface Quote {
   timestamp: number;
 }
 
-/** Dữ liệu nến (candlestick) */
+/** Candlestick data */
 export interface OHLC {
   symbol: string;
   time: number;

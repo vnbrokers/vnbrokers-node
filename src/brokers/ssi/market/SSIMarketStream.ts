@@ -6,8 +6,8 @@ import type { SSIQuoteRaw } from './market.types';
 type Listener = (quote: Quote) => void;
 
 /**
- * Quản lý 1 kết nối websocket dùng chung cho nhiều symbol,
- * tránh mỗi subscribe() lại mở 1 connection riêng.
+ * Manages one WebSocket connection shared by multiple symbols,
+ * avoiding a separate connection for every subscribe() call.
  */
 export class SSIMarketStream {
   private ws?: WebSocket;
@@ -44,7 +44,7 @@ export class SSIMarketStream {
         const quote = mapSSIQuote(parsed);
         this.listeners.get(quote.symbol)?.forEach((cb) => cb(quote));
       } catch {
-        // bỏ qua message không parse được (ping/pong, heartbeat...)
+        // Ignore unparseable messages (ping/pong, heartbeat, etc.)
       }
     });
   }

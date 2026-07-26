@@ -1,4 +1,4 @@
-// Public entry point — chỉ export những gì user cần dùng
+// Public entry point: export only what users need
 
 export { VNBrokerClient } from './client';
 

@@ -42,7 +42,7 @@ function normalizeOrderID(id: unknown): number | undefined {
   }
   throw new BrokerError({
     code: BrokerErrorCode.UNKNOWN,
-    message: `DNSE trả về order id không hợp lệ: ${String(id)}`,
+    message: `DNSE returned an invalid order ID: ${String(id)}`,
     broker: 'dnse',
     raw: id,
   });

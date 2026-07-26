@@ -22,7 +22,7 @@ export class DNSEAuthService {
     if (!response.tradingToken) {
       throw new BrokerError({
         code: BrokerErrorCode.AUTH_FAILED,
-        message: 'DNSE trả về trading-token rỗng',
+        message: 'DNSE returned an empty trading token',
         broker: 'dnse',
         raw: response,
       });

@@ -5,9 +5,9 @@ import { SSIBroker } from './brokers/ssi';
 import { DNSEBroker } from './brokers/dnse';
 
 /**
- * Entry point chính của thư viện.
- * User chỉ cần biết class này — không cần quan tâm implementation riêng
- * của DNSE/FHSC/SSI/TCBS bên dưới.
+ * Main entry point for the library.
+ * Users only need this class and do not need to know about the underlying
+ * DNSE/FHSC/SSI/TCBS implementations.
  *
  * @example
  * const client = new VNBrokerClient({
@@ -36,19 +36,19 @@ export class VNBrokerClient {
       case 'fhsc':
         throw new BrokerError({
           code: BrokerErrorCode.UNKNOWN,
-          message: `Broker "${config.broker}" chưa được implement — mới có sẵn: dnse, ssi`,
+          message: `Broker "${config.broker}" is not implemented; available brokers: dnse, ssi`,
           broker: config.broker,
         });
       default:
         throw new BrokerError({
           code: BrokerErrorCode.UNKNOWN,
-          message: `Broker không hợp lệ: ${String(config.broker)}`,
+          message: `Invalid broker: ${String(config.broker)}`,
           broker: String(config.broker),
         });
     }
   }
 
-  /** Expose broker gốc nếu cần dùng tính năng đặc thù không có trong IBroker */
+  /** Expose the underlying broker for broker-specific features not available in IBroker */
   get raw(): IBroker {
     return this.broker;
   }

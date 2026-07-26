@@ -3,8 +3,8 @@ import type { Session } from '../../types/common';
 import type { BaseHttpClient } from './BaseHttpClient';
 
 /**
- * Mỗi broker có luồng auth khác nhau (OTP, consumerId/secret, 2FA...)
- * nhưng đều phải trả về Session chuẩn hóa.
+ * Each broker has a different authentication flow (OTP, consumerId/secret, 2FA...)
+ * but they must all return a normalized Session.
  */
 export abstract class BaseAuthService {
   protected constructor(protected readonly http: BaseHttpClient) {}

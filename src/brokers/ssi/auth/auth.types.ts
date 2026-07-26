@@ -1,4 +1,4 @@
-/** Response thô SSI trả về khi login — field name theo tài liệu SSI FastConnect */
+/** Raw SSI login response; field names follow the SSI FastConnect documentation */
 export interface SSIAccessTokenResponse {
   status: number;
   message: string;

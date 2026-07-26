@@ -47,7 +47,7 @@ export class DNSEHttpClient {
     if (options.trading && !this.tradingToken) {
       throw new BrokerError({
         code: BrokerErrorCode.AUTH_FAILED,
-        message: 'DNSE yêu cầu trading-token cho trading request',
+        message: 'DNSE requires a trading token for trading requests',
         broker: 'dnse',
       });
     }
@@ -104,7 +104,7 @@ export class DNSEHttpClient {
     const record = data as Record<string, unknown>;
     throw new BrokerError({
       code: BrokerErrorCode.UNKNOWN,
-      message: stringValue(record.message) ?? 'DNSE từ chối request',
+      message: stringValue(record.message) ?? 'DNSE rejected the request',
       broker: 'dnse',
       raw: data,
     });
@@ -116,15 +116,15 @@ export class DNSEHttpClient {
       return new BrokerError({
         code: status === 401 ? BrokerErrorCode.TOKEN_EXPIRED : BrokerErrorCode.NETWORK_ERROR,
         message: error.response
-          ? `DNSE API lỗi: ${status}`
-          : 'Không kết nối được tới DNSE API',
+          ? `DNSE API error: ${status}`
+          : 'Unable to connect to the DNSE API',
         broker: 'dnse',
         raw: error.response?.data ?? error.message,
       });
     }
     return new BrokerError({
       code: BrokerErrorCode.UNKNOWN,
-      message: 'Lỗi không xác định khi gọi DNSE API',
+      message: 'Unknown error while calling the DNSE API',
       broker: 'dnse',
       raw: error,
     });

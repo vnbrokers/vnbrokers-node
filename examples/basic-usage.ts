@@ -20,7 +20,7 @@ async function main() {
   const quote = await client.getQuote('VNM');
   console.log('VNM quote:', quote);
 
-  // Đặt lệnh mua LIMIT
+  // Place a LIMIT buy order
   const result = await client.placeOrder({
     accountId: account.accountId,
     symbol: 'VNM',
@@ -31,7 +31,7 @@ async function main() {
   });
   console.log('Order result:', result);
 
-  // Theo dõi giá realtime
+  // Subscribe to real-time quotes
   const unsubscribe = client.subscribeQuote('VNM', (q) => {
     console.log('Realtime quote:', q);
   });

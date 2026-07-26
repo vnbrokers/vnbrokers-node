@@ -14,7 +14,7 @@ export interface SSIPositionRaw {
   account: string;
   symbol: string;
   quantity: number;
-  avgPrice: number; // đơn vị: nghìn đồng theo API SSI
+  avgPrice: number; // Unit: thousands of VND according to the SSI API
   marketPrice?: number;
 }
 

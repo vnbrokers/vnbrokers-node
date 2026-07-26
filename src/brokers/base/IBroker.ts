@@ -12,9 +12,9 @@ import type {
 } from '../../types/common';
 
 /**
- * Interface chuẩn mà mọi adapter (SSIBroker, DNSEBroker, ...) phải implement.
- * VNBrokerClient chỉ làm việc thông qua interface này, không quan tâm
- * chi tiết implementation riêng của từng công ty chứng khoán.
+ * Standard interface implemented by every adapter (SSIBroker, DNSEBroker, etc.).
+ * VNBrokerClient only interacts through this interface and does not depend on
+ * implementation details specific to each brokerage.
  */
 export interface IBroker {
   login(credentials: AuthConfig): Promise<Session>;

@@ -1,6 +1,6 @@
 export type BrokerName = 'dnse' | 'fhsc' | 'ssi' | 'tcbs';
 
-/** Thông tin xác thực, mỗi broker dùng field khác nhau nên để linh hoạt */
+/** Flexible credentials because each broker uses different fields */
 export interface AuthConfig {
   consumerId?: string;
   consumerSecret?: string;
@@ -13,7 +13,7 @@ export interface AuthConfig {
 export interface BrokerConfig {
   broker: BrokerName;
   auth: AuthConfig;
-  baseUrl?: string; // override endpoint mặc định nếu cần (sandbox/prod)
+  baseUrl?: string; // Override the default endpoint when needed (sandbox/production)
   timeoutMs?: number;
 }
 

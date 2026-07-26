@@ -16,7 +16,7 @@ export class SSIAuthService extends BaseAuthService {
     if (!consumerId || !consumerSecret) {
       throw new BrokerError({
         code: BrokerErrorCode.AUTH_FAILED,
-        message: 'SSI yêu cầu consumerId và consumerSecret',
+        message: 'SSI requires consumerId and consumerSecret',
         broker: 'ssi',
       });
     }
@@ -32,12 +32,12 @@ export class SSIAuthService extends BaseAuthService {
   }
 
   async refreshToken(session: Session): Promise<Session> {
-    // SSI FastConnect không có refresh token riêng — cần login lại khi hết hạn
+    // SSI FastConnect has no separate refresh token; log in again after expiration
     return session;
   }
 
   async logout(): Promise<void> {
-    // SSI không có endpoint logout — client chỉ cần bỏ token phía mình
+    // SSI has no logout endpoint; the client only needs to discard its local token
     return;
   }
 }

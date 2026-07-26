@@ -12,7 +12,7 @@ export interface DNSEResolvedConfig {
 
 export function resolveDNSEConfig(config: DNSEBrokerConfig): DNSEResolvedConfig {
   if (!config.apiKey || !config.apiSecret) {
-    throw new Error('DNSE yêu cầu apiKey và apiSecret');
+    throw new Error('DNSE requires apiKey and apiSecret');
   }
 
   return {

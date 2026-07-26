@@ -16,7 +16,7 @@ export class SSIMarketService extends BaseMarketService {
     const res = await this.http.get<SSIQuoteResponse>('/api/v2/Market/Quote', { symbol });
     const first = res.data[0];
     if (!first) {
-      throw new Error(`Không có dữ liệu giá cho mã ${symbol}`);
+      throw new Error(`No quote data found for symbol ${symbol}`);
     }
     return mapSSIQuote(first);
   }

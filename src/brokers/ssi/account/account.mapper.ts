@@ -1,7 +1,7 @@
 import type { Account, Balance, Position } from '../../../types/common';
 import type { SSIAccountRaw, SSIBalanceRaw, SSIPositionRaw } from './account.types';
 
-// SSI trả giá theo đơn vị nghìn đồng — chuẩn hóa về đồng (VND) cho nhất quán toàn lib
+// SSI returns prices in thousands of VND; normalize to VND for consistency across the library
 const SSI_PRICE_UNIT = 1000;
 
 export function mapSSIAccount(raw: SSIAccountRaw): Account {

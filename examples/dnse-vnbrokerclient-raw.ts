@@ -22,7 +22,7 @@ async function main() {
 
   const dnse = client.raw as DNSEBroker;
 
-  // DNSE hiện expose native API; login() chuẩn của IBroker không phù hợp flow OTP.
+  // DNSE currently exposes its native API; IBroker.login() does not fit the OTP flow.
   const instruments = await dnse.native.marketData.getInstruments({
     symbol: process.env.DNSE_SYMBOL ?? 'VN30F1M',
     limit: 5,

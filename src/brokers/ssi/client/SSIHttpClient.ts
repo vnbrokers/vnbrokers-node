@@ -4,8 +4,8 @@ import type { SSIResolvedConfig } from '../ssi.config';
 import { BrokerError, BrokerErrorCode } from '../../../errors/BrokerError';
 
 /**
- * Wrapper axios riêng cho SSI: gắn header, xử lý timeout,
- * và chuẩn hóa lỗi HTTP thành BrokerError trước khi ném ra ngoài.
+ * SSI-specific axios wrapper: attaches headers, handles timeouts,
+ * and normalizes HTTP errors into BrokerError before exposing them.
  */
 export class SSIHttpClient implements BaseHttpClient {
   private readonly instance: AxiosInstance;
@@ -53,7 +53,7 @@ export class SSIHttpClient implements BaseHttpClient {
       if (status === 401) {
         return new BrokerError({
           code: BrokerErrorCode.TOKEN_EXPIRED,
-          message: 'SSI token expired hoặc không hợp lệ',
+          message: 'SSI token has expired or is invalid',
           broker: 'ssi',
           raw: err.response?.data,
         });
@@ -61,7 +61,7 @@ export class SSIHttpClient implements BaseHttpClient {
       if (status === 429) {
         return new BrokerError({
           code: BrokerErrorCode.RATE_LIMITED,
-          message: 'SSI API bị rate limit',
+          message: 'SSI API rate limit exceeded',
           broker: 'ssi',
           raw: err.response?.data,
         });
@@ -69,21 +69,21 @@ export class SSIHttpClient implements BaseHttpClient {
       if (!err.response) {
         return new BrokerError({
           code: BrokerErrorCode.NETWORK_ERROR,
-          message: 'Không kết nối được tới SSI API',
+          message: 'Unable to connect to the SSI API',
           broker: 'ssi',
           raw: err.message,
         });
       }
       return new BrokerError({
         code: BrokerErrorCode.UNKNOWN,
-        message: `SSI API lỗi: ${status}`,
+        message: `SSI API error: ${status}`,
         broker: 'ssi',
         raw: err.response?.data,
       });
     }
     return new BrokerError({
       code: BrokerErrorCode.UNKNOWN,
-      message: 'Lỗi không xác định khi gọi SSI API',
+      message: 'Unknown error while calling the SSI API',
       broker: 'ssi',
       raw: err,
     });

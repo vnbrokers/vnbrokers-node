@@ -1,6 +1,6 @@
 import { BrokerError, BrokerErrorCode } from '../../../errors/BrokerError';
 
-/** Mã lỗi nghiệp vụ SSI trả trong body (khác với HTTP status) */
+/** SSI business error codes returned in the response body (not HTTP status codes) */
 const SSI_BUSINESS_ERROR_MAP: Record<string, BrokerErrorCode> = {
   '412': BrokerErrorCode.INVALID_ORDER,
   '413': BrokerErrorCode.INSUFFICIENT_BALANCE,

@@ -19,8 +19,9 @@ import { DNSEMarketDataService } from './marketdata/DNSEMarketDataService';
 import { DNSETradingService } from './trading/DNSETradingService';
 
 /**
- * DNSE hiện chỉ expose native operations. `login()` chuẩn không dùng được cho
- * flow OTP; gọi `native.auth.sendEmailOTP()` rồi `native.auth.getTradingToken()`.
+ * DNSE currently exposes native operations only. The standard `login()` method does
+ * not support the OTP flow; call `native.auth.sendEmailOTP()` and then
+ * `native.auth.getTradingToken()`.
  */
 export class DNSEBroker implements IBroker {
   readonly native: {
@@ -39,7 +40,7 @@ export class DNSEBroker implements IBroker {
   }
 
   login(_credentials: AuthConfig): Promise<Session> {
-    return Promise.reject(this.unsupported('login() không phù hợp với DNSE OTP flow'));
+    return Promise.reject(this.unsupported('login() does not support the DNSE OTP flow'));
   }
 
   logout(): Promise<void> {
@@ -60,7 +61,7 @@ export class DNSEBroker implements IBroker {
   private unsupported(operation: string): BrokerError {
     return new BrokerError({
       code: BrokerErrorCode.UNKNOWN,
-      message: `DNSE chưa hỗ trợ normalized ${operation}; dùng native service`,
+      message: `DNSE does not support normalized ${operation}; use the native service`,
       broker: 'dnse',
     });
   }

@@ -1,7 +1,7 @@
 /**
- * Hợp đồng tối thiểu mà mỗi HttpClient riêng của từng broker (SSIHttpClient,
- * VndirectHttpClient...) phải cung cấp. Cho phép các Base*Service dùng chung
- * logic mà không phụ thuộc trực tiếp vào axios.
+ * Minimum contract that each broker-specific HttpClient (SSIHttpClient,
+ * VndirectHttpClient, etc.) must provide. This lets Base*Service implementations
+ * share logic without depending directly on axios.
  */
 export interface BaseHttpClient {
   get<T>(path: string, params?: Record<string, unknown>): Promise<T>;

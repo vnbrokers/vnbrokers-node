@@ -5,7 +5,7 @@ export enum OrderSide {
 
 export enum OrderType {
   LIMIT = 'LIMIT',
-  MARKET = 'MARKET', // ATO/ATC/MP tùy sàn sẽ map trong mapper riêng
+  MARKET = 'MARKET', // ATO/ATC/MP are mapped by exchange-specific mappers
   STOP = 'STOP',
 }
 

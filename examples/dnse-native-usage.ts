@@ -22,7 +22,7 @@ async function main() {
 
   if (!process.env.DNSE_TRADING_TOKEN) {
     await broker.native.auth.sendEmailOTP();
-    console.log('Đã gửi OTP email. Điền OTP/passcode vào env DNSE_OTP.');
+    console.log('OTP email sent. Enter the OTP/passcode in the DNSE_OTP environment variable.');
 
     const otp = requireEnv('DNSE_OTP');
     const tokenResponse = await broker.native.auth.getTradingToken({
@@ -48,7 +48,7 @@ async function main() {
     });
     console.log('Orders:', orders);
   } else {
-    console.log('Bỏ qua getOrders vì chưa có DNSE_ACCOUNT_NO');
+    console.log('Skipping getOrders because DNSE_ACCOUNT_NO is not set');
   }
 }
 

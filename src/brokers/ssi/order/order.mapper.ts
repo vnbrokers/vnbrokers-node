@@ -15,7 +15,7 @@ const SIDE_FROM_SSI: Record<'NB' | 'NS', OrderSide> = {
 const TYPE_TO_SSI: Record<OrderType, 'LO' | 'MP'> = {
   [OrderType.LIMIT]: 'LO',
   [OrderType.MARKET]: 'MP',
-  [OrderType.STOP]: 'LO', // SSI không có stop order thuần — xử lý phía client nếu cần
+  [OrderType.STOP]: 'LO', // SSI has no native stop order; handle it client-side if needed
 };
 
 const TYPE_FROM_SSI: Record<SSIOrderRaw['orderType'], OrderType> = {

@@ -11,7 +11,7 @@ export interface SSIOrderRaw {
   orderId: string;
   account: string;
   symbol: string;
-  side: 'NB' | 'NS'; // Nb = buy, NS = sell theo ký hiệu SSI
+  side: 'NB' | 'NS'; // NB = buy, NS = sell in SSI notation
   orderType: 'LO' | 'MP' | 'ATO' | 'ATC';
   quantity: number;
   price: number;
