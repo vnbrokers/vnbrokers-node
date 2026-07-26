@@ -1,6 +1,6 @@
 {
   "name": "vnbrokers",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "VNBrokers SDK for Node.js, supporting Vietnamese securities brokers such as DNSE, SSI, TCBS, FHSC, and more.",
   "keywords": [
     "chungkhoan",
