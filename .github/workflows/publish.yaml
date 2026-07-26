@@ -1,0 +1,60 @@
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish package
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write
+    environment:
+      name: ${{ github.event_name == 'push' && 'publish' || 'dry-run' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "26"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Verify tag matches package version
+        if: github.event_name == 'push'
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          PACKAGE_VERSION="$(node -p "require('./package.json').version")"
+          if [[ "$RELEASE_TAG" != "v$PACKAGE_VERSION" ]]; then
+            echo "::error::Tag $RELEASE_TAG does not match package version v$PACKAGE_VERSION"
+            exit 1
+          fi
+
+      - name: Check package contents
+        if: github.event_name == 'workflow_dispatch'
+        run: npm publish --dry-run
+
+      - name: Publish package to npm
+        if: github.event_name == 'push'
+        run: npm stage publish --provenance --access public

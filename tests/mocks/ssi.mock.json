@@ -1,0 +1,32 @@
+{
+  "accounts": {
+    "status": 0,
+    "message": "Success",
+    "data": [{ "account": "0001234567", "accountName": "NGUYEN VAN A" }]
+  },
+  "balance": {
+    "status": 0,
+    "message": "Success",
+    "data": [
+      {
+        "account": "0001234567",
+        "totalCash": 50000000,
+        "withdrawableCash": 45000000,
+        "totalAsset": 120000000
+      }
+    ]
+  },
+  "positions": {
+    "status": 0,
+    "message": "Success",
+    "data": [
+      {
+        "account": "0001234567",
+        "symbol": "VNM",
+        "quantity": 100,
+        "avgPrice": 65.5,
+        "marketPrice": 67.2
+      }
+    ]
+  }
+}
