@@ -32,7 +32,6 @@ export class VNBrokerClient {
         return new DNSEBroker(config as import('./types/config').DNSEBrokerConfig);
       case 'ssi':
         return new SSIBroker(config);
-      case 'dnse':
       case 'tcbs':
       case 'fhsc':
         throw new BrokerError({
