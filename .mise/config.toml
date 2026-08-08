@@ -1,6 +1,6 @@
 [tools]
 lefthook = "2.1.10"
-node = "22.23.2"
+node = "24.19.0"
 oxfmt = "0.62.0"
 zizmor = "1.29.0"
 
